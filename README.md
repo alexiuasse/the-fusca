@@ -13,10 +13,10 @@ The goal in this project is to have a backend in Django and a App in Flutter to 
 ### How to run
 
 - First create a file ```.env``` that is based of ```.env.template```
-- Create a virtualenv with ```virtualenv .venv```
-- Install requirements with run ```pip install -r requirements.txt```
-    - If you wanna install requiments from the most up to date libs replace ```requiments.txt``` to ```requirements_update.txt```
-- Run docker to use postgres (see bellow how to do it)
+- Create a virtualenv using the pipenv, to install it:
+    - ```pip install --user pipenv```
+    - ```pipenv install``` to install all packages needed
+- Run docker to use postgres (see the section bellow how to do it)
 - Run ```make run-migrate``` if it is the first time running, because it will run the ```migrations ```and ```collectstatic``` too
     - If it's not the first time running, run ```make run```
 

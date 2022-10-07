@@ -1,0 +1,15 @@
+__pycache__/
+
+# django
+./django/*.sqlite3
+./django/*.rdb
+./django/collected-static/
+./django/collected-media/
+./django/media/
+./django/.venv
+./django/deploy/
+./django/deploy-*/
+
+# global settings
+.env
+.vscode/*.log

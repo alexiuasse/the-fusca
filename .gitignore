@@ -1,14 +1,8 @@
 __pycache__/
 
-# django
-./backend/*.sqlite3
-./backend/*.rdb
-./backend/collected-static/
-./backend/collected-media/
-./backend/media/
-./backend/.venv
-./deploy/
-./deploy-*/
+# deploy
+deploy/
+deploy-*/
 
 # global settings
 .env

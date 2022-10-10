@@ -3,9 +3,7 @@ version: '3.8'
 services:
 
   django:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    build: ./backend
     container_name: backend
     restart: unless-stopped
     environment:

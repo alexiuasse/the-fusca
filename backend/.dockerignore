@@ -1,0 +1,10 @@
+# Ignore everything
+**
+
+# ... except for dependencies and source
+!Pipfile
+!Pipfile.lock
+!manage.py
+!app/
+!base/
+!core/

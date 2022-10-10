@@ -1,18 +1,33 @@
-FROM python:3.7.4-alpine3.10
+FROM python:3.10.7-buster AS base
 
-ADD backend/Pipfile /app/Pipfile
-ADD backend/Pipfile.lock /app/Pipfile.lock
+# Setup env
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONFAULTHANDLER 1
 
-RUN set -ex \
-    && apk add --no-cache --virtual postgresql-dev build-base \
-    && /env/bin/pip install --upgrade pip \
-    && /env/bin/pip install --user pipenv \
-    && pipenv install
+FROM base AS python-deps
 
-# COPY . /code/
+# Install pipenv and compilation dependencies
+RUN pip install pipenv
+RUN apt-get update && apt-get install -y --no-install-recommends gcc
 
-ADD backend /app
-WORKDIR /app
+# Install python dependencies in /.venv
+COPY Pipfile .
+COPY Pipfile.lock .
+RUN PIPENV_VENV_IN_PROJECT=1 pipenv install
+
+FROM base AS runtime
+
+# Copy virtual env from python-deps stage
+COPY --from=python-deps /.venv /.venv
+ENV PATH="/.venv/bin:$PATH"
+
+ADD . /code
+WORKDIR /code
+
+# Install application into container
+COPY . /code/
 
 EXPOSE 8000
 

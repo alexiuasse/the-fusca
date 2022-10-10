@@ -14,7 +14,7 @@ clean:
 	@$( $(shell docker ps -a -q --filter="name=$(DOCKER_PROJECT_NAME)") | docker rm )
 	@$( $(shell docker images -q --filter="reference=*$(dDOCKER_PROJECT_NAME)*") | docker rmi )
 
-run-db:
+run:
 	@docker-compose -f $(_DOCKER_COMPOSE_FILE) -p $(DOCKER_PROJECT_NAME) build
 	@docker-compose -f $(_DOCKER_COMPOSE_FILE) -p $(DOCKER_PROJECT_NAME) up -d --force-recreate --remove-orphans
 	$(MAKE) logs
@@ -38,8 +38,8 @@ test:
 collectstatic:
 	./manage.py collectstatic
 
-run:
-	./manage.py runserver 0.0.0.0:8000
+# run:
+# 	./manage.py runserver 0.0.0.0:8000
 
 run-migrate:
 	$(MAKE) update-models
